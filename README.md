@@ -62,7 +62,7 @@ The requirements for this project are found below. Please read them carefully. W
 
 - Fork this repository
 
-- When you're done push your branch into the remote and open a pull request (don't worry, this is a private repo, noone but us is gonna know)
+- When you're done push your changes and send us the link to your fork (don't worry, this is a private repo, noone but us is gonna know)
 
 - Please attach to this README.md any considerations you have or any instructions to setup and run your code if it differs from `yarn install` & `yarn start` (or the `npm` equivalent)
 
