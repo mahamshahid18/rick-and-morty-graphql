@@ -60,7 +60,7 @@ The requirements for this project are found below. Please read them carefully. W
 
 ## How to Deliver
 
-- Clone this project and create a branch with your name
+- Fork this repository
 
 - When you're done push your branch into the remote and open a pull request (don't worry, this is a private repo, noone but us is gonna know)
 
