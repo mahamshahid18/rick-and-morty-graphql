@@ -1,4 +1,4 @@
-# coding-challenge-frontend-engineer-m
+# coding-challenge-fullstack-engineer-s
 
 ## Specification
 
@@ -12,6 +12,17 @@ You can find the documentation for the API [here](https://rickandmortyapi.com/do
 This repository is a skeleton application you can use as starting point (but if you feel like deleting all the code and starting from scratch nobody is going to stop you). It should work out of the box with only `yarn install` or `yarn start` (or with `npm` if that's your cup of tea).
 
 The requirements for this project are found below. Please read them carefully. We usually try to avoid any tricks or traps in this type of tests so if something is not clear please don't hesitate to contact us.
+
+### 0 - Login screen
+
+- There's a login form in which the user can type in a username
+  - If the username doesn't exist a new one is created
+  - If the usernamne already exists the data from it is retrieved
+
+- After login a button on top for "logout" should be displayed
+  - When clicked, the user must be taken back to the login screen
+
+- If a user is logged in, reloading the page must preserve it until the "logout" button is clicked
 
 ### 1 - Implement a list of character cards
 
@@ -38,11 +49,36 @@ The requirements for this project are found below. Please read them carefully. W
 
 - Only one card must be expanded. So when a collapsed card is expanded any other expanded card must collapse automatically.
 
-### 3 - Appearance and Code Style
+### 3 - Mark your favorite characters
+
+- There must be a "favorite" button on a character card that, when clicked, marks a character as favorite
+
+- There must ba a "Display favorites" button on top of the page
+  - When clicked the button changes to "Display all" and only favorited character cards are displayed
+  - When "Display all" is clicked, the button changes back to "Display favorites"
+
+- When the page is reloaded the list of favorited characters must be preserved
+
+- The list of favorited characters must be preserved per username
+
+### 4 - Appearance and Code Style
 
 - Your design can be simple but must be consistent and usable (here an [example](#example-of-layout) of what it could look like). So please pay attention to consistency in spacing, readability, usability etc.
 
 - Your code must be clean and easy to understand. So please think of how you name your functions and variables, how you separate concerns within your code, how you organize your modules, how you name your CSS classes, which HTML tags you choose etc.
+
+### 5 - Fetching Data
+
+- Imagine that requesting data from the [Rick And Morty API](https://rickandmortyapi.com/graphql) is very costly per request and that such data doesn't change often:
+  - There must be a server to fetch the data from (i.e [Rick And Morty API](https://rickandmortyapi.com/graphql) should _**NOT**_ be accessed directly by the frontend).
+  - The server must expose a GraphQL API to fetch the data.
+  - All data fetched from [Rick And Morty API](https://rickandmortyapi.com/graphql) should be stored in a local server database.
+  - Stored data should expire from time to time and be fetched from [Rick And Morty API](https://rickandmortyapi.com/graphql) again.
+
+### Bonus - Docker
+
+- Not required, but if you have *zeit und lust* you can dockerize your solution.
+  - Internally we use [docker-compose](https://docs.docker.com/compose/) so everything can be run with only one command (`docker-compose up`), but feel free to use anything you want (docker-compose, bash scripts etc), just don't forget to add the instructions on how to run it to the documentation.
 
 ### Bonus - Pagination
 
@@ -51,8 +87,9 @@ The requirements for this project are found below. Please read them carefully. W
 
 <h3 id="example-of-layout">Example of layout</h3>
 
-![example of list of character cards](./example-layout.png)
-
+![login screen](./logged-out.png)
+![example of page with all cards visible](./logged-in-no-filter.png)
+![example of page with filter activated](./logged-in-with-filter.png)
 ## Requirements
 
 - You must use **React**. This is the main library in our frontend currently.
@@ -64,7 +101,7 @@ The requirements for this project are found below. Please read them carefully. W
 
 - When you're done push your changes and send us the link to your fork (don't worry, this is a private repo, noone but us is gonna know)
 
-- Please attach to this README.md any considerations you have or any instructions to setup and run your code if it differs from `yarn install` & `yarn start` (or the `npm` equivalent)
+- Please attach to this README.md any considerations you have or any instructions to setup and run your code if it differs from `yarn/npm install` & `yarn/npm start`
 
 - Please feel free to reach out if something is not clear or you have any questions. We will be glad to interact with you and answer any question you may have.
 
@@ -72,7 +109,9 @@ The requirements for this project are found below. Please read them carefully. W
 
 - If it's taking you more than 3-4 hours to complete this challenge, you're probably overcomplicating something. Keep it simple, clean and smart.
 
-- Feel free to install any libraries you think is necessary, but remember it's not such a complicated project so try to avoid things that could be easily solved with vanilla JS. E.g.: 
+- Feel free to choose which DBMS to use (SQLite, a text file, MySQL, PostgreSQL, MongoDB, CouchDB...), just keep it simple to setup and initialize, and add instructions on how to do it to the README file.
+
+- Feel free to install any libraries you think may be necessary, but remember it's not such a complicated project so try to avoid things that could be easily solved with vanilla JS. E.g.:
   - lodash :thumbsup:
   - [leftpad](https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code/) :thumbsdown:
 
