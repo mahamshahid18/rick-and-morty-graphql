@@ -87,6 +87,8 @@ The requirements for this project are found below. Please read them carefully. W
 
 <h3 id="example-of-layout">Example of layout</h3>
 
+The below are only an example. Feel free to follow it or to come up with your own.
+
 ![login screen](./logged-out.png)
 ![example of page with all cards visible](./logged-in-no-filter.png)
 ![example of page with filter activated](./logged-in-with-filter.png)
@@ -100,6 +102,7 @@ The requirements for this project are found below. Please read them carefully. W
 - Fork this repository
 
 - When you're done push your changes and send us the link to your fork (don't worry, this is a private repo, noone but us is gonna know)
+  - If you feel more comfortable, you can deliver it on another source code hosting (like Gitlab), send us your solution via e-mail in a compacted file or as a link to compacted file in a storage service (like Google Drive, Dropbox, AWS S3).
 
 - Please attach to this README.md any considerations you have or any instructions to setup and run your code if it differs from `yarn/npm install` & `yarn/npm start`
 
