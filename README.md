@@ -72,8 +72,9 @@ The requirements for this project are found below. Please read them carefully. W
 - Imagine that requesting data from the [Rick And Morty API](https://rickandmortyapi.com/graphql) is very costly per request and that such data doesn't change often:
   - There must be a server to fetch the data from (i.e [Rick And Morty API](https://rickandmortyapi.com/graphql) should _**NOT**_ be accessed directly by the frontend).
   - The server must expose a GraphQL API to fetch the data.
-  - All data fetched from [Rick And Morty API](https://rickandmortyapi.com/graphql) should be stored in a local server database.
-  - Stored data should expire from time to time and be fetched from [Rick And Morty API](https://rickandmortyapi.com/graphql) again.
+  - Everytime data is fetched from [Rick And Morty API](https://rickandmortyapi.com/graphql) it should be stored in a local server database.
+  - The data stored on the local server database should expire from time to time. 
+  - Expired data should be fetched from [Rick And Morty API](https://rickandmortyapi.com/graphql) again and replaced with the newer version in local server database.
 
 ### Bonus - Docker
 
