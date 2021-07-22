@@ -9,7 +9,7 @@ In order for us to see a bit of how you work and a bit of what you know we came 
 We're are going to be using the [Rick And Morty API](https://rickandmortyapi.com/graphql) for that.
 You can find the documentation for the API [here](https://rickandmortyapi.com/documentation).
 
-This repository is a skeleton application you can use as starting point (but if you feel like deleting all the code and starting from scratch nobody is going to stop you). It should work out of the box with only `yarn install` or `yarn start` (or with `npm` if that's your cup of tea).
+This repository is a skeleton application you can use as a starting point (but if you feel like deleting all the code and starting from scratch nobody is going to stop you). It should work out of the box with only `yarn install` or `yarn start` (or with `npm` if that's your cup of tea).
 
 The requirements for this project are found below. Please read them carefully. We usually try to avoid any tricks or traps in this type of tests so if something is not clear please don't hesitate to contact us.
 
