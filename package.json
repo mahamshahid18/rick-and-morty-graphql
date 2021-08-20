@@ -27,6 +27,7 @@
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "apollo-server": "^3.1.2",
+    "apollo-server-express": "^3.1.2",
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "mongoose": "^5.13.7",

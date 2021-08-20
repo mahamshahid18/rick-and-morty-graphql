@@ -15,7 +15,9 @@ const rickAndMortyModel = new mongoose.Schema({
         dimension: { type: String }
     },
     origin: {
-        name: { type: String }
+        name: { type: String },
+        type: { type: String },
+        dimension: { type: String }
     },
     episode: [
         {

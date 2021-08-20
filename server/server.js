@@ -1,17 +1,29 @@
 const express = require('express');
 const axios = require('axios');
+const { ApolloServer, gql } = require('apollo-server-express');
 
 const connectToDb = require('./dbConnector');
 const rickAndMortyModel = require('./models/RickAndMortyModel');
-const favoritesModel = require('./models/RickAndMortyModel');
-
-const app = express();
+const favoritesModel = require('./models/FavoritesModel');
+const typeDefs = require('./typeDefs');
+const resolvers = require('./resolvers');
 
 const startServer = async () => {
+    const app = express();
+    
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers
+    });
+
+    await server.start();
+    
+    server.applyMiddleware({ app });
+
     await connectToDb();
     
     app.listen(3000, async () => {
-        console.log('application started -- listening on port 3000');
+        console.log(`application started -- listening on port http://localhost:3000${server.graphqlPath}`);
         console.log('connected to db');
 
         const apiBaseUrl = 'https://rickandmortyapi.com/graphql';
@@ -31,6 +43,8 @@ const startServer = async () => {
                     }
                     origin {
                         name
+                        type
+                        dimension
                     }
                     episode {
                         name
@@ -54,7 +68,9 @@ const startServer = async () => {
 
             try {
                 const deletionOperationResult = await rickAndMortyModel.deleteMany({});
-                const dbOperationResult = await rickAndMortyModel.insertMany(resultsFromApi);
+                const insertOperationResult = await rickAndMortyModel.insertMany(resultsFromApi);
+                // const findOperationResult = await rickAndMortyModel.find();
+                // console.log(findOperationResult);
             } catch (error) {
                 console.log(error)
             }
