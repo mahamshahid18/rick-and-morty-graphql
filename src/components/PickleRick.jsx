@@ -1,30 +1,19 @@
 import React, { Component } from "react";
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { CharactersListQuery } from '../Queries';
 
 import "./PickleRick.css";
 
-const QUERY_FOR_PICKLE_RICK = gql`
-  query PickleRick { 
-    characters(filter: {
-      name: "Pickle Rick"
-    }) {
-      results {
-        name
-        image
-      }
-    }
-  }`;
-
 const PickleRick = () => {
-  const { loading, error, data } = useQuery(QUERY_FOR_PICKLE_RICK);
+  const { loading, error, data } = useQuery(CharactersListQuery);
 
   if (loading) 
     return <p>Loading...</p>;
 
-  if (error || !data || !data.characters || !data.characters.results.length > 0)
+  if (error || !data || !data.charactersList || !data.charactersList.results.length > 0)
     return <p>Error :(</p>;
 
-  const { characters: { results } } = data;
+  const { charactersList: { results } } = data
   const { name, image } = results[0];
 
   return <div className='PickleRick'>

@@ -22,8 +22,8 @@ const startServer = async () => {
 
     await connectToDb();
     
-    app.listen(3000, async () => {
-        console.log(`application started -- listening on port http://localhost:3000${server.graphqlPath}`);
+    app.listen(3600, async () => {
+        console.log(`application started -- listening on port http://localhost:3600${server.graphqlPath}`);
         console.log('connected to db');
 
         const apiBaseUrl = 'https://rickandmortyapi.com/graphql';
