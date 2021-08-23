@@ -28,8 +28,28 @@ const typeDefs = gql`
     results: [Character]
   }
 
+  type FavoriteCharacter {
+    id: ID
+    username: String
+  }
+
+  type FavoriteCharactersList {
+    results: [FavoriteCharacter]
+  }
+
+  type User {
+    username: String
+  }
+
   type Query {
     charactersList: CharactersList
+    favoritesList(username: String): FavoriteCharactersList
+    user(username: String): User
+  }
+
+  type Mutation {
+    addFavoriteCharacter(id: String, username: String): FavoriteCharacter
+    addUser(username: String): User
   }
 `;
 
