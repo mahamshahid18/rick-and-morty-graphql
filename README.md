@@ -10,6 +10,13 @@ To run the server, you will first need to set up a very basic mongodb database. 
 * The server does not expect any users on the database to connect to. And hence, it connects directly using `localhost:27017` as the default host and port. So, please make sure this configuration is available
 * The server expects to connect to a database called `rick-and-morty`. Please go ahead and create this. You can follow the screenshots below to create a database (using mongodb compass). P.S => mongodb compass asks for a collection name before it creates the database. Please provide `apiData`  as the collection name as the server will use this collection later on.
 
+![Capture](https://user-images.githubusercontent.com/12479952/130519905-ee17ad01-2e61-4ae1-afe9-bee66397bda1.PNG)  
+
+
+![Capture-1](https://user-images.githubusercontent.com/12479952/130519914-7ed7cf45-d512-4f71-aff3-9bf0acddb054.PNG)  
+
+
+
 Once the db has been created, run the following command to spin up an instance of the server:
 
 * `npm run start-server`
