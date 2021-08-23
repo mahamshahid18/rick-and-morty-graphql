@@ -13,9 +13,6 @@ const useStyles = makeStyles(() => ({
         borderRadius: '4px',
         padding: '2rem 2rem',
         minHeight: '10vh'
-    },
-    message: {
-
     }
 }));
 
@@ -24,7 +21,7 @@ export const FeedbackMessage = ({ message }) => {
 
     return (
         <Grid container className={classes.container}>
-            <Typography variant='h5' color='primary' className={classes.message}>
+            <Typography variant='h5' color='primary'>
                 {message}
             </Typography>
         </Grid>

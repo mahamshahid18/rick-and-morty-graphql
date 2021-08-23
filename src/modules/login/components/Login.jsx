@@ -1,15 +1,15 @@
 import React, { useEffect, useContext, useState } from 'react';
-
-import { TextField, Grid, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { useLazyQuery, useMutation } from '@apollo/client';
 
-import { USER_QUERY, USER_MUTATION } from '../../../Queries';
-import { loginUser } from '../../../pages/utils/authentication.util';
-import { userAuthContext } from '../../../pages/utils/userAuthContext';
+import { makeStyles } from '@material-ui/core/styles';
+import { TextField, Grid, Button } from '@material-ui/core';
+
+import { loginUser } from '../../shared/utils';
+import { userAuthContext } from '../../shared/contexts';
+import { GET_USER_QUERY, ADD_USER_MUTATION } from '../../../queries';
 
 const useStyles = makeStyles(() => ({
-    pageContainer: {
+    container: {
         width: '100%',
         height: '90vh',
         display: 'flex',
@@ -32,20 +32,17 @@ const useStyles = makeStyles(() => ({
     },
     loginButton: {
         margin: '1rem 1rem'
-    },
-    fontWeightBold: {
-        fontWeight: '700'
     }
 }));
 
-export const LoginComponent = () => {
+export const Login = () => {
     const classes = useStyles();
     const [usernameInput, setUsernameInput] = useState('');
     const { setUserLoggedIn, setUsername } = useContext(userAuthContext);
 
-    const [getUser, { loading, data }] = useLazyQuery(USER_QUERY);
+    const [getUser, { loading, data }] = useLazyQuery(GET_USER_QUERY);
     const [createUserAndLogin] = useMutation(
-        USER_MUTATION,
+        ADD_USER_MUTATION,
         {
             onCompleted(data) {
                 if (data && data.addUser && data.addUser.username) {
@@ -77,12 +74,12 @@ export const LoginComponent = () => {
     };
 
     return (
-        <Grid container className={classes.pageContainer}>
+        <Grid container className={classes.container}>
             <Grid item className={classes.loginCard}>
                 <TextField
-                    id="username-input"
-                    label="Username"
-                    variant="outlined"
+                    id='username-input'
+                    label='Username'
+                    variant='outlined'
                     fullWidth
                     value={usernameInput}
                     onChange={onInputChange}

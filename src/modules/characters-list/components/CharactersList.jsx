@@ -1,19 +1,20 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+
 import { Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import "./CharactersList.css";
+import { GET_CHARACTERS_LIST_QUERY, GET_FAVORITES_QUERY } from '../../../queries';
 
-import { CharacterCard } from "./CharacterCard";
-import { CHARACTERS_LIST_QUERY, GET_FAVORITES_QUERY } from '../../../Queries';
+import { userAuthContext } from '../../shared/contexts';
 
-import { userAuthContext } from '../../../pages/utils/userAuthContext';
+import { CharacterCard } from './CharacterCard';
 import { FeedbackMessage } from '../../shared/components/FeedbackMessage';
 import { CardSkeletonLoader } from '../../shared/components/CardSkeletonLoader';
 
+
 const useStyles = makeStyles(() => ({
-    displayButton: {
+    displayAllButton: {
         marginRight: '1rem'
     }
 }));
@@ -27,7 +28,7 @@ export const CharactersList = () => {
     const [favoriteCharacters, setFavoriteCharacters] = useState([]);
     const [expandedCharacterCard, setExpandedCharacterCard] = useState(null);
 
-    const { loading: charactersListLoading, error: charactersListError, data: charactersListData } = useQuery(CHARACTERS_LIST_QUERY);
+    const { loading: charactersListLoading, error: charactersListError, data: charactersListData } = useQuery(GET_CHARACTERS_LIST_QUERY);
     const { loading: favoritesLoading, error: favoritesError, data: favoritesData } = useQuery(GET_FAVORITES_QUERY, {
         variables: {
             username: username
@@ -63,7 +64,6 @@ export const CharactersList = () => {
         }
     }
 
-
     if (charactersListLoading) {
         return (
             <Box mt={4}>
@@ -82,7 +82,7 @@ export const CharactersList = () => {
     if (charactersListError || !charactersListData) {
         return (
             <Box mt={4}>
-                <FeedbackMessage message="Error fetching data :(" />
+                <FeedbackMessage message='Error fetching data :(' />
             </Box>
         );
     }
@@ -93,7 +93,7 @@ export const CharactersList = () => {
                 <Button
                     variant='contained'
                     color='secondary'
-                    className={classes.displayButton}
+                    className={classes.displayAllButton}
                     onClick={onDisplayAllClick}>
                     Display All
                 </Button>
@@ -126,7 +126,7 @@ export const CharactersList = () => {
                             />;
                         })
                     ) : (
-                        <FeedbackMessage message="No Character Found :(" />
+                        <FeedbackMessage message='No Character Found :(' />
                     )
                 }
             </Box>

@@ -1,3 +1,3 @@
-export * from './CharactersListQuery';
-export * from './UserQuery';
+export * from './CharactersListQueries';
+export * from './UserQueries';
 export * from './FavoritesQueries';

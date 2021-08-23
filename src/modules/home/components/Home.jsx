@@ -1,15 +1,28 @@
 import React, { useContext } from 'react';
 
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+
+import { logoutUser } from '../../shared/utils';
+import { userAuthContext } from '../../shared/contexts';
 
 import { CharactersList } from '../../characters-list/components/CharactersList';
-import { userAuthContext } from '../../../pages/utils/userAuthContext';
-import { logoutUser } from '../../../pages/utils/authentication.util';
-
-import './Home.css';
 
 const useStyles = makeStyles(() => ({
+    homeRoot: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#e1f5fe'
+    },
+    characterListContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '50%',
+        minHeight: '95vh'
+    },
     toolbar: {
         display: 'flex',
         justifyContent: 'space-between'
@@ -27,10 +40,10 @@ export const Home = () => {
     }
 
     return (
-        <div className="home-root">
-            <AppBar position="sticky">
+        <div className={classes.homeRoot}>
+            <AppBar position='sticky'>
                 <Toolbar className={classes.toolbar}>
-                    <Typography variant="h6">
+                    <Typography variant='h6'>
                         {username}
                     </Typography>
                     <Button variant='contained' color='secondary' onClick={onLogoutClick}>
@@ -38,7 +51,7 @@ export const Home = () => {
                     </Button>
                 </Toolbar>
             </AppBar>
-            <div className="character-list-container">
+            <div className={classes.characterListContainer}>
                 <CharactersList />
             </div>
         </div>

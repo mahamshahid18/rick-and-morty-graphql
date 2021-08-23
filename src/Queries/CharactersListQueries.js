@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const CHARACTERS_LIST_QUERY = gql`
-  query Query {
+export const GET_CHARACTERS_LIST_QUERY = gql`
+  query GetCharactersList {
     charactersList {
       results {
         id
@@ -10,11 +10,6 @@ export const CHARACTERS_LIST_QUERY = gql`
         species
         gender
         image
-        location {
-            name
-            type
-            dimension
-        }
         origin {
             name
             type

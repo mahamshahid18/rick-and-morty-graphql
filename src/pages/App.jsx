@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
 import Provider from '../api/Provider';
-import { Home } from '../modules/home/components/Home';
-import { isUserLoggedIn, getLoggedInUsername } from '../pages/utils/authentication.util';
-import { LoginComponent } from "../modules/login/components/LoginComponent";
-import { userAuthContext } from './utils/userAuthContext';
 
-import "./App.css";
+import { userAuthContext } from '../modules/shared/contexts';
+import { isUserLoggedIn, getLoggedInUsername } from '../modules/shared/utils';
+
+import { Home } from '../modules/home/components/Home';
+import { Login } from '../modules/login/components/Login';
+
+import './App.css';
 
 const App = () => {
   const [userLoggedIn, setUserLoggedIn] = useState(isUserLoggedIn());
@@ -16,7 +18,7 @@ const App = () => {
     <userAuthContext.Provider value={{ userLoggedIn, username, setUserLoggedIn, setUsername }}>
       <Provider>
         {
-          userLoggedIn ? <Home /> : <LoginComponent />
+          userLoggedIn ? <Home /> : <Login />
         }
       </Provider>
     </userAuthContext.Provider>

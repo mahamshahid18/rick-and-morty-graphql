@@ -1,14 +1,13 @@
-import React, { useContext, useEffect } from 'react';
-
+import React, { useContext } from 'react';
 import { useMutation } from '@apollo/client';
 
-import { Grid, Button, IconButton, Box, Typography } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Button, IconButton, Box, Typography } from '@material-ui/core';
 
-import { ADD_FAVORITE_MUTATION, GET_FAVORITES_QUERY } from '../../../Queries';
-import { userAuthContext } from '../../../pages/utils/userAuthContext';
+import { userAuthContext } from '../../shared/contexts';
+import { ADD_FAVORITE_MUTATION, GET_FAVORITES_QUERY } from '../../../queries';
 
 import { Episode } from './Episode';
 
