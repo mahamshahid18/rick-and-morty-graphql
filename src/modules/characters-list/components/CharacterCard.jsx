@@ -1,13 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+
+import { Grid, Button, IconButton, Box, Typography } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { ADD_FAVORITE_MUTATION, GET_FAVORITES_QUERY } from '../../../Queries';
@@ -138,11 +135,13 @@ export const CharacterCard = ({ id, name, status, species, gender, image, origin
                     </Box>
                 </Grid>
                 <Grid item xs={2} className={classes.cardActionsSection}>
-                    <Button onClick={() => onFavoriteClick()}>
-                        {
-                            isFavoriteCharacter ? <FavoriteIcon /> : <FavoriteBorderIcon />
-                        }
-                    </Button>
+                    <Box display='flex' justifyContent='center'>
+                        <IconButton onClick={() => onFavoriteClick()}>
+                            {
+                                isFavoriteCharacter ? <FavoriteIcon /> : <FavoriteBorderIcon />
+                            }
+                        </IconButton>
+                    </Box>
                     {
                         !isExpanded && (
                             <Button onClick={() => onCardExpandClick(id)}>
