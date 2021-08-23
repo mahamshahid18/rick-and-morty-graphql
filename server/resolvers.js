@@ -8,14 +8,14 @@ const resolvers = {
       const results = await CharactersList.find({});
 
       return {
-        "results": results
+        'results': results
       };
     },
     favoritesList: async (_, { username }) => {
       const results = await FavoritesList.find({ username: username });
 
       return {
-        "favorites": results
+        'favorites': results
       };
     },
     user: async (_, { username }) => {

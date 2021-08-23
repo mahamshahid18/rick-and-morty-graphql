@@ -1,27 +1,25 @@
 const express = require('express');
 const axios = require('axios');
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 
 const connectToDb = require('./dbConnector');
-const rickAndMortyModel = require('./models/RickAndMortyModel');
-const favoritesModel = require('./models/FavoritesModel');
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
+const rickAndMortyModel = require('./models/RickAndMortyModel');
 
 const startServer = async () => {
     const app = express();
-    
+
     const server = new ApolloServer({
-      typeDefs,
-      resolvers
+        typeDefs,
+        resolvers
     });
 
     await server.start();
-    
     server.applyMiddleware({ app });
 
     await connectToDb();
-    
+
     app.listen(3600, async () => {
         console.log(`application started -- listening on port http://localhost:3600${server.graphqlPath}`);
         console.log('connected to db');
@@ -54,11 +52,11 @@ const startServer = async () => {
             }
         }`;
 
-        try {            
+        try {
             const response = await axios({
                 method: 'post',
                 url: apiBaseUrl,
-                data: JSON.stringify({query: dataQuery}),
+                data: JSON.stringify({ query: dataQuery }),
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -67,17 +65,17 @@ const startServer = async () => {
             const resultsFromApi = response.data.data.characters.results;
 
             try {
-                const deletionOperationResult = await rickAndMortyModel.deleteMany({});
-                const insertOperationResult = await rickAndMortyModel.insertMany(resultsFromApi);
-                // const findOperationResult = await rickAndMortyModel.find();
-                // console.log(findOperationResult);
+                await rickAndMortyModel.deleteMany({});
+                await rickAndMortyModel.insertMany(resultsFromApi);
             } catch (error) {
-                console.log(error)
+                console.log(error);
+                throw err;
             }
 
         } catch (err) {
             console.log(err);
-        }        
+            throw err;
+        }
     });
 }
 
