@@ -1,132 +1,38 @@
-# coding-challenge-fullstack-engineer-s
+# Rick & Morty API Consumption Coding Challenge
+This is a summary of the coding challenge which involves consuming the Rick and Morty API by exposing a graphql API for the frontend to work with. Details about running the project as well as improvements, and a demo (video) are available towards the end of this document.  
 
-## Specification
+## Running the project  
+The first thing that you can do before getting into server or frontend specific details is to install all the dependencies. Run `npm i` to install the dependencies.
 
-Hello!
+### Server
+To run the server, you will first need to set up a very basic mongodb database. Assuming that mongodb is already installed and available for use, please perform the following to set up the database ready to be used by the server
 
-In order for us to see a bit of how you work and a bit of what you know we came up with this technical challenge. Here you're going to consume from a publicly accessible Graphql API and display some of its information in a web page.
+* The server does not expect any users on the database to connect to. And hence, it connects directly using `localhost:27017` as the default host and port. So, please make sure this configuration is available
+* The server expects to connect to a database called `rick-and-morty`. Please go ahead and create this. You can follow the screenshots below to create a database (using mongodb compass). P.S => mongodb compass asks for a collection name before it creates the database. Please provide `apiData`  as the collection name as the server will use this collection later on.
 
-We're are going to be using the [Rick And Morty API](https://rickandmortyapi.com/graphql) for that.
-You can find the documentation for the API [here](https://rickandmortyapi.com/documentation).
+Once the db has been created, run the following command to spin up an instance of the server:
 
-This repository is a skeleton application you can use as a starting point (but if you feel like deleting all the code and starting from scratch nobody is going to stop you). It should work out of the box with only `yarn install` or `yarn start` (or with `npm` if that's your cup of tea).
+* `npm run start-server`
 
-The requirements for this project are found below. Please read them carefully. We usually try to avoid any tricks or traps in this type of tests so if something is not clear please don't hesitate to contact us.
+And that's it. The server will now be running on `http://localhost:3600/graphql`. If you want to take a look at the exposed API and query it as well, you can visit `http://localhost:3600/graphql` and then click on `Query your server` to open the sandbox environment.
 
-### 0 - Login screen
+### Frontend
+Run the command `npm start` to run the frontend. You can then navigate to `http://localhost:8080/` to access the interface
 
-- There's a login form in which the user can type in a username
-  - If the username doesn't exist a new one is created
-  - If the usernamne already exists the data from it is retrieved
+## Improvements
+* Currently, the server refreshes the data from the Rick & Morty API when the server is restarted. This can be improved by scheduling a job which handles this task
+* The server doesn't gracefully handle errors. It just uses console log and throws the error. A proper error handling middleware can be written which logs the errors, and gracefully handles them ensuring that the server doesn't go down due to unexpected errors
+* The server can be integrated with an error monitoring system to create error logs which developers can look into to debug problems. This can also be used to create alerts for critical errors
+* The UI is not responsive on mobile. For smaller screens (like tablets), the card structure look ok but can definitely improve. Solution: for smaller screens, a different layout of the card design can be used which arranges sections in rows instead of columns
+* To share global data, like login information - the app uses the React context API. But for more data sharing between components, a proper state management tool like redux can be used
+* The frontend doesn't react to errors. For example, if the server goes down or there are network issues, the frontend does not provide the necessary feedback to the user. This can be improved by handling these cases and providing user friendly errors and feedback where required
+* On the login page, the username field does not validate the input. Validation can be added
 
-- After login a button on top for "logout" should be displayed
-  - When clicked, the user must be taken back to the login screen
+## Challenges Faced
+* The topic of GraphQL was completely new to me. I had never worked with a graphql API (consumption on the FE) or even create a graphql API myself. So this was definitely something out of the comfort zone for me and it took some time to figure out the underlying principles. I quite enjoyed this journey of learning however. Painful at first but enlightening at the end
+* Figuring out apollo-client and how to work with queries & mutations (mostly syntax) was a bit tricky
+* Mongodb & mongoose gave me a lot of grief. Probably because I last worked with mongodb back in end of 2018 so it's been quite some time since I worked with it. And as Murphy's law states, whatever could go wrong did go wrong 🙄
+* The scope of the task was quite big considering the time slot of 3-4 hours. There were lots of small things to do but each small thing was a smaller feature in its own which takes time to understand and build. It most definitely can be hacked together quicker but to write nicer cleaner code and also handle UI states such as errors, loading states and make the UI nice & clean - it takes time (to be more focused on the smaller details)
 
-- If a user is logged in, reloading the page must preserve it until the "logout" button is clicked
-
-### 1 - Implement a list of character cards
-
-- There must be a list of character cards consisting of the following character information:
-  - image
-  - name
-  - species
-  - gender
-  - origin
-  - dimension
-  - status
-
-- The list must contain all the charaters from the 1st page returned by the api
-
-### 2 - Make the character card expandable with extra information
-
-- There must be a "more" button that, when clicked, expands the card to display a list of the 3 latests episodes that character was displayed in.
-
-- The list of latests episodes must be sorted from the most recent to the oldest episode.
-
-- When the list of latests episodes is open the "more" button becomes a "less" button.
-
-- When the "less" button is clicked the list of latests episodes is collapsed and the "less" button becomes a "more" button.
-
-- Only one card must be expanded. So when a collapsed card is expanded any other expanded card must collapse automatically.
-
-### 3 - Mark your favorite characters
-
-- There must be a "favorite" button on a character card that, when clicked, marks a character as favorite
-
-- There must ba a "Display favorites" button on top of the page
-  - When clicked the button changes to "Display all" and only favorited character cards are displayed
-  - When "Display all" is clicked, the button changes back to "Display favorites"
-
-- When the page is reloaded the list of favorited characters must be preserved
-
-- The list of favorited characters must be preserved per username
-
-### 4 - Appearance and Code Style
-
-- Your design can be simple but must be consistent and usable (here an [example](#example-of-layout) of what it could look like). So please pay attention to consistency in spacing, readability, usability etc.
-
-- Your code must be clean and easy to understand. So please think of how you name your functions and variables, how you separate concerns within your code, how you organize your modules, how you name your CSS classes, which HTML tags you choose etc.
-
-### 5 - Fetching Data
-
-- Imagine that requesting data from the [Rick And Morty API](https://rickandmortyapi.com/graphql) is very costly per request and that such data doesn't change often:
-  - There must be a server to fetch the data from (i.e [Rick And Morty API](https://rickandmortyapi.com/graphql) should _**NOT**_ be accessed directly by the frontend).
-  - The server must expose a GraphQL API to fetch the data.
-  - Everytime data is fetched from [Rick And Morty API](https://rickandmortyapi.com/graphql) it should be stored in a local server database.
-  - The data stored on the local server database should expire from time to time. 
-  - Expired data should be fetched from [Rick And Morty API](https://rickandmortyapi.com/graphql) again and replaced with the newer version in local server database.
-
-### Bonus - Docker
-
-- Not required, but if you have *zeit und lust* you can dockerize your solution.
-  - Internally we use [docker-compose](https://docs.docker.com/compose/) so everything can be run with only one command (`docker-compose up`), but feel free to use anything you want (docker-compose, bash scripts etc), just don't forget to add the instructions on how to run it to the documentation.
-
-### Bonus - Pagination
-
-- Not required, but if you have *zeit und lust* you can make your solution paginated and display the rest of the pages from the API
-  - You choose how to do it (infitite scroll, pages with a page counter etc).
-
-<h3 id="example-of-layout">Example of layout</h3>
-
-The below are only an example. Feel free to follow it or to come up with your own.
-
-![login screen](./logged-out.png)
-![example of page with all cards visible](./logged-in-no-filter.png)
-![example of page with filter activated](./logged-in-with-filter.png)
-## Requirements
-
-- You must use **React**. This is the main library in our frontend currently.
-- You must use **GraphQL**. This is the main form our frontend retrieves data currently.
-
-## How to Deliver
-
-- Fork this repository
-
-- When you're done push your changes and send us the link to your fork (don't worry, this is a private repo, noone but us is gonna know)
-  - If you feel more comfortable, you can deliver it on another source code hosting (like Gitlab), send us your solution via e-mail in a compacted file or as a link to compacted file in a storage service (like Google Drive, Dropbox, AWS S3).
-
-- Please attach to this README.md any considerations you have or any instructions to setup and run your code if it differs from `yarn/npm install` & `yarn/npm start`
-
-- Please feel free to reach out if something is not clear or you have any questions. We will be glad to interact with you and answer any question you may have.
-
-## Tips & Tricks
-
-- If it's taking you more than 3-4 hours to complete this challenge, you're probably overcomplicating something. Keep it simple, clean and smart.
-
-- Feel free to choose which DBMS to use (SQLite, a text file, MySQL, PostgreSQL, MongoDB, CouchDB...), just keep it simple to setup and initialize, and add instructions on how to do it to the README file.
-
-- Feel free to install any libraries you think may be necessary, but remember it's not such a complicated project so try to avoid things that could be easily solved with vanilla JS. E.g.:
-  - lodash :thumbsup:
-  - [leftpad](https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code/) :thumbsdown:
-
-- Commit frequently. If you want you can adopt some commit convention like [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
-
-- We'll have time to discuss a bit more about this project in a later moment, so take note of any improvements you'd make if this is a real-life project and, if any, the corners you had to cut.
-
-<br />
-<br />
-<br />
-<br />
-
-<p style="text-align: center;">Good Luck!</p>
-<p style="text-align: center;">We're looking forward to see what you can do!</p>
+## Demo
+You can find a demo of the project over here: [https://www.loom.com/share/2fce839b4d5642c89b417e8eeaee7f51](https://www.loom.com/share/2fce839b4d5642c89b417e8eeaee7f51)
