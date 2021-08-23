@@ -92,8 +92,9 @@ export const LoginComponent = () => {
                     fullWidth
                     variant='contained'
                     color='primary'
-                    onClick={onLoginClick}
                     className={classes.loginButton}
+                    disabled={!usernameInput || usernameInput === ''}
+                    onClick={onLoginClick}
                 >
                     Login
                 </Button>

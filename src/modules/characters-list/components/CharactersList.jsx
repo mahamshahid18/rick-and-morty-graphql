@@ -9,6 +9,8 @@ import { CharacterCard } from "./CharacterCard";
 import { CHARACTERS_LIST_QUERY, GET_FAVORITES_QUERY } from '../../../Queries';
 
 import { userAuthContext } from '../../../pages/utils/userAuthContext';
+import { FeedbackMessage } from '../../shared/components/FeedbackMessage';
+import { CardSkeletonLoader } from '../../shared/components/CardSkeletonLoader';
 
 const useStyles = makeStyles(() => ({
     displayButton: {
@@ -29,7 +31,8 @@ export const CharactersList = () => {
     const { loading: favoritesLoading, error: favoritesError, data: favoritesData } = useQuery(GET_FAVORITES_QUERY, {
         variables: {
             username: username
-        }
+        },
+        notifyOnNetworkStatusChange: true
     });
 
     const onCardExpandClick = (id) => {
@@ -51,7 +54,6 @@ export const CharactersList = () => {
 
     const onDisplayFavoritesClick = () => {
         const favoriteCharactersList = characters.filter((character) => favoriteCharacters.includes(character.id));
-        // console.log(favoriteCharactersList);
         setCharacters(favoriteCharactersList);
     }
 
@@ -62,11 +64,28 @@ export const CharactersList = () => {
     }
 
 
-    if (charactersListLoading)
-        return <p>Loading...</p>;
+    if (charactersListLoading) {
+        return (
+            <Box mt={4}>
+                {
+                    [1, 2, 3, 4, 5, 6].map(() => {
+                        return (
+                            <CardSkeletonLoader />
+                        )
+                    })
 
-    if (charactersListError || !charactersListData || !charactersListData.charactersList || !charactersListData.charactersList.results.length > 0)
-        return <p>Error :(</p>;
+                }
+            </Box>
+        )
+    }
+
+    if (charactersListError || !charactersListData) {
+        return (
+            <Box mt={4}>
+                <FeedbackMessage message="Error fetching data :(" />
+            </Box>
+        );
+    }
 
     return (
         <Box>
@@ -87,24 +106,28 @@ export const CharactersList = () => {
             </Box>
             <Box mt={3}>
                 {
-                    characters.map((character) => {
-                        const { id, name, status, species, gender, image, origin, episode } = character;
+                    characters.length ? (
+                        characters.map((character) => {
+                            const { id, name, status, species, gender, image, origin, episode } = character;
 
-                        return <CharacterCard
-                            key={id}
-                            id={id}
-                            name={name}
-                            status={status}
-                            species={species}
-                            gender={gender}
-                            image={image}
-                            origin={origin}
-                            episode={episode}
-                            isFavoriteCharacter={favoriteCharacters.includes(id)}
-                            isExpanded={expandedCharacterCard === id}
-                            onCardExpandClick={onCardExpandClick}
-                        />;
-                    })
+                            return <CharacterCard
+                                key={id}
+                                id={id}
+                                name={name}
+                                status={status}
+                                species={species}
+                                gender={gender}
+                                image={image}
+                                origin={origin}
+                                episode={episode}
+                                isFavoriteCharacter={favoriteCharacters.includes(id)}
+                                isExpanded={expandedCharacterCard === id}
+                                onCardExpandClick={onCardExpandClick}
+                            />;
+                        })
+                    ) : (
+                        <FeedbackMessage message="No Character Found :(" />
+                    )
                 }
             </Box>
         </Box>

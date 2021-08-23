@@ -39,6 +39,16 @@ const useStyles = makeStyles(() => ({
     },
     episodesListSection: {
         marginTop: '2rem'
+    },
+    episodesListItem: {
+        marginTop: '1rem',
+        marginBottom: '1rem'
+    },
+    lessButtonContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        paddingLeft: '3rem',
+        paddingRight: '3rem'
     }
 }));
 
@@ -72,7 +82,7 @@ export const CharacterCard = ({ id, name, status, species, gender, image, origin
     }
 
     return (
-        <Grid container key={id} className={classes.container}>
+        <Grid container className={classes.container}>
             <Grid container>
                 <Grid item xs={4}>
                     <img src={image} />
@@ -158,7 +168,7 @@ export const CharacterCard = ({ id, name, status, species, gender, image, origin
                                 {
                                     recentEpisodes.map((recentEpisode, index) => {
                                         return recentEpisode ? (
-                                            <li key={index}>
+                                            <li key={index} className={classes.episodesListItem}>
                                                 <Episode name={recentEpisode.name} air_date={recentEpisode.air_date} />
                                             </li>
                                         ) : null;
@@ -167,11 +177,13 @@ export const CharacterCard = ({ id, name, status, species, gender, image, origin
                             </ul>
                         </Grid>
                         <Grid item xs={12}>
-                            <Button onClick={() => onCardExpandClick(null)}>
-                                <Typography variant='body1'>
-                                    Less
-                                </Typography>
-                            </Button>
+                            <Grid item xs={12} className={classes.lessButtonContainer}>
+                                <Button onClick={() => onCardExpandClick(null)}>
+                                    <Typography variant='body1'>
+                                        Less
+                                    </Typography>
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 )
