@@ -34,7 +34,7 @@ const typeDefs = gql`
   }
 
   type FavoriteCharactersList {
-    results: [FavoriteCharacter]
+    favorites: [FavoriteCharacter]
   }
 
   type User {

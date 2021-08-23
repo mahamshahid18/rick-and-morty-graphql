@@ -15,7 +15,7 @@ const resolvers = {
       const results = await FavoritesList.find({ username: username });
 
       return {
-        "results": results
+        "favorites": results
       };
     },
     user: async (_, { username }) => {
