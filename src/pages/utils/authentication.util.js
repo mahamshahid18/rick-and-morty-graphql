@@ -4,6 +4,12 @@ export const isUserLoggedIn = () => {
     return !!username;
 }
 
+export const getLoggedInUsername = () => {
+    const username = localStorage.getItem('username');
+
+    return username;
+}
+
 export const loginUser = (username) => {
     if (!isUserLoggedIn(username) && username) {
         localStorage.setItem('username', username);
