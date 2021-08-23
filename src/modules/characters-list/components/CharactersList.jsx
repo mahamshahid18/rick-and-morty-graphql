@@ -89,7 +89,7 @@ export const CharactersList = () => {
 
     return (
         <Box>
-            <Box my={3} display='flex' justifyContent='end'>
+            <Box my={3} display='flex' justifyContent='flex-end'>
                 <Button
                     variant='contained'
                     color='secondary'

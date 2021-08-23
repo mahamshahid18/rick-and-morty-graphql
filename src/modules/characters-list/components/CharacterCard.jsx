@@ -33,6 +33,9 @@ const useStyles = makeStyles(() => ({
         flexDirection: 'column',
         justifyContent: 'space-between'
     },
+    characterImage: {
+        maxWidth: '90%'
+    },
     episodesListSection: {
         marginTop: '2rem'
     },
@@ -81,7 +84,7 @@ export const CharacterCard = ({ id, name, status, species, gender, image, origin
         <Grid container className={classes.container}>
             <Grid container>
                 <Grid item xs={4}>
-                    <img src={image} />
+                    <img src={image} className={classes.characterImage} />
                 </Grid>
                 <Grid item xs={6}>
                     <Box display='flex'>
