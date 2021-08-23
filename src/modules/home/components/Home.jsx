@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
 export const Home = () => {
     const classes = useStyles();
     const { username, setUserLoggedIn, setUsername } = useContext(userAuthContext);
-    console.log(username);
 
     const onLogoutClick = () => {
         logoutUser();
@@ -29,7 +28,7 @@ export const Home = () => {
 
     return (
         <div className="home-root">
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Toolbar className={classes.toolbar}>
                     <Typography variant="h6">
                         {username}
@@ -39,7 +38,6 @@ export const Home = () => {
                     </Button>
                 </Toolbar>
             </AppBar>
-            <div>Display favorites button</div>
             <div className="character-list-container">
                 <CharactersList />
             </div>

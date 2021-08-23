@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
+import { useMutation } from '@apollo/client';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +9,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { ADD_FAVORITE_MUTATION, GET_FAVORITES_QUERY } from '../../../Queries';
+import { userAuthContext } from '../../../pages/utils/userAuthContext';
 
 import { Episode } from './Episode';
 
@@ -49,10 +53,23 @@ const getLastThreeEpisodes = (episodes) => {
     return recentEpisodes;
 }
 
-export const CharacterCard = ({ id, name, status, species, gender, image, origin, episode, isExpanded, onCardExpandClick }) => {
+export const CharacterCard = ({ id, name, status, species, gender, image, origin, episode, isFavoriteCharacter, isExpanded, onCardExpandClick }) => {
     const classes = useStyles();
     const originText = origin.type ? `[${origin.type}] ${origin.name}` : origin.name;
     const recentEpisodes = getLastThreeEpisodes(episode);
+
+    const { username } = useContext(userAuthContext);
+
+    const [addFavorite, { loading, error, data }] = useMutation(
+        ADD_FAVORITE_MUTATION,
+        {
+            refetchQueries: [GET_FAVORITES_QUERY],
+        }
+    );
+
+    const onFavoriteClick = () => {
+        addFavorite({ variables: { id: id, username: username } });
+    }
 
     return (
         <Grid container key={id} className={classes.container}>
@@ -111,8 +128,10 @@ export const CharacterCard = ({ id, name, status, species, gender, image, origin
                     </Box>
                 </Grid>
                 <Grid item xs={2} className={classes.cardActionsSection}>
-                    <Button>
-                        <FavoriteBorderIcon />
+                    <Button onClick={() => onFavoriteClick()}>
+                        {
+                            isFavoriteCharacter ? <FavoriteIcon /> : <FavoriteBorderIcon />
+                        }
                     </Button>
                     {
                         !isExpanded && (
