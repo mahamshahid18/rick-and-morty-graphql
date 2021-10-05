@@ -1,5 +1,20 @@
-# Rick & Morty API Consumption Coding Challenge
-This is a summary of the coding challenge which involves consuming the Rick and Morty API by exposing a graphql API for the frontend to work with. Details about running the project as well as improvements, and a demo (video) are available towards the end of this document.  
+# Rick & Morty GraphQL Project
+This project was created to gain familiarity with the concepts of GraphQL. It involves the consumption of the Rick and Morty API by exposing a graphql API for the frontend to work with. Details about running the project as well as improvements, and a demo (video) are available towards the end of this document.
+
+## Technologies used
+
+### Backend
+- Node.js
+- Express
+- Apollo server
+- Axios
+- Mongodb
+
+### Frontend
+- React
+- Apollo client
+- React Context API + hooks
+- Material UI
 
 ## Running the project  
 The first thing that you can do before getting into server or frontend specific details is to install all the dependencies. Run `npm i` to install the dependencies.
@@ -39,7 +54,7 @@ Run the command `npm start` to run the frontend. You can then navigate to `http:
 * The topic of GraphQL was completely new to me. I had never worked with a graphql API (consumption on the FE) or even created a graphql API myself. So this was definitely something out of the comfort zone for me and it took some time to figure out the underlying principles. I quite enjoyed this journey of learning however. Painful at first but enlightening at the end
 * Figuring out apollo-client and how to work with queries & mutations (mostly syntax) was a bit tricky
 * Mongodb & mongoose gave me a lot of grief. Probably because I last worked with mongodb back in end of 2018 so it's been quite some time since I worked with it. And as Murphy's law states, whatever could go wrong did go wrong 🙄
-* The scope of the task was quite big considering the time slot of 3-4 hours. There were lots of small things to do but each small thing was a smaller feature in its own which takes time to understand and build. It most definitely can be hacked together quicker but to write nicer cleaner code and also handle UI states such as errors, loading states and make the UI nice & clean - it takes time (to be more focused on the smaller details)
+* The aim for this project to have something nice and working within half a day. However, the scope of the task was quite big considering this timeslot - especially because I had to learn the basics of GraphQL as well first. There were lots of small things to do but each small thing was a smaller feature in its own which takes time to understand and build. It most definitely can be hacked together quicker but to write nicer cleaner code and also handle UI states such as errors, loading states and make the UI nice & clean - it takes time (to be more focused on the smaller details)
 
 ## Demo
 You can find a demo of the project over here: [https://www.loom.com/share/2fce839b4d5642c89b417e8eeaee7f51](https://www.loom.com/share/2fce839b4d5642c89b417e8eeaee7f51)
